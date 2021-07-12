@@ -1,7 +1,7 @@
 const multer = require('../middleware/multer-config');
 const models = require('../models');
 const fs = require('fs');
-const { post } = require('../routes/comments');
+
 
 
 exports.createPost = async (req, res) => {
