@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
 import { PostService } from "src/app/services/post.service";
 import { AuthService } from "src/app/services/auth.service";
@@ -24,7 +24,13 @@ export class PostsComponent implements OnInit {
   comments!:Comments;
   mode!: string;
   isOpen =  false;
-
+  errorMsg!: string;
+  loading!: boolean;
+  postSub!: Subscription;
+  posts!: Post[];
+  currentPost!: number;
+  currentComment!: number;
+  commentDisplay = false;
   constructor(
     private formBuilder: FormBuilder,
     private postService: PostService,
@@ -38,19 +44,7 @@ export class PostsComponent implements OnInit {
     console.log(this.userId)
     console.log(this.posts$)
     this.posts$.forEach(post => console.log(post));
-    this.initEmptyForm();
-        this.route.params.subscribe(
-      (params) => {
-        if (!params.id) {
-          this.mode = 'new';
-          this.initEmptyForm();
-        } else {
-          this.mode = 'edit';
-         
-          
-        }
-      }
-    );
+    this.commentDisplay = false;
   }
 
   fetchAll(): Observable<Post[]> {
@@ -66,28 +60,6 @@ export class PostsComponent implements OnInit {
     this.postService
       .deletePost(postId)
       .subscribe(() => (this.posts$ = this.fetchAll()));
-  }
-
-  initEmptyForm(){
-  this.form = this.formBuilder.group({
-    comments: [null, Validators.required]
-  });
-  }
-
-  onSubmit(){
-  const newComment = new Comments();
-  newComment.comments = this.form.get('comments')!.value;
-      if (this.mode === 'new') {
-      this.postService.addComment(newComment).then(
-        (response) => {
-          console.log(response);         
-        }
-      ).catch(
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
   }
 
 

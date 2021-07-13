@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <button (click)="isOpen = !isOpen" class="btn">
+      Poster
+    </button>
+<form [formGroup]="commentsForm" *ngIf=isOpen >
+  <div class="form-group">
+    <label for="comments">Commentaire</label>
+    <input type="text" class="form-control" id="comments" formControlName="comments">
+  </div>
+ 
+ 
+  <button mat-raised-button type="submit" color="primary" (click)="onSubmit()" [disabled]="commentsForm.invalid">SUBMIT</button>
+</form>
+</div>
+</div>

@@ -1,8 +1,8 @@
-export class Comments{
-	id!: string;
-	comments!: string;
-	postId!: string;
-	userId!: string;
-	createdAt!: Date;
-	updatedAt!: Date;
+export interface Comments{
+	id: string;
+	comments: string;
+	PostId: string;
+	UserId: string;
+	createdAt: Date;
+	updatedAt: Date;
 }

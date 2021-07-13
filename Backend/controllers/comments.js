@@ -17,14 +17,14 @@ exports.createComment = async (req, res) => {
 		if (!findUser) {
 			throw new Error("Sorry,we can't find your account");
 		}
-		// post
+		// comment
 		
 		
 		const newComment = await models.Comment.create({
 			comments: req.body.comments,
 			PostId: req.body.PostId,
 			UserId: req.user.id,
-			isModerate: 1,
+			
 			
 		});
 

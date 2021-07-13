@@ -20,20 +20,6 @@
      <div class="card-text" *ngIf="post.content!=='null'">
         <p class="mb-0">{{post.content}}</p>
     </div>
-    <div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-    <button (click)="isOpen = !isOpen" class="btn">
-      Commenter
-    </button>
-<form [formGroup]="form" *ngIf=isOpen >
-  <div class="form-group">
-    <label for="comments"></label>
-    <input type="textarea" class="form-control" id="comments" formControlName="comments">
-  </div>
+    <app-comments-form></app-comments-form>
 
- 
-  <button mat-raised-button type="submit" color="primary" (click)="onSubmit()"  [disabled]="form.invalid">SUBMIT</button>
-</form>
-</div>
-</div>
 </div>

@@ -5,10 +5,11 @@ import { Observable, Subject } from "rxjs";
 import { catchError, first } from "rxjs/operators";
 
 import { Post } from "../models/Post";
-import { User } from "../models/User";
+
 import { ErrorHandlerService } from "./error-handler.service";
 import { AuthService } from "./auth.service";
-import { Comments } from "../models/Comments";
+import { HttpResponse } from '../models/HttpResponse';
+import { MessagesService } from "./message.service";
 
 
 @Injectable({
@@ -25,8 +26,13 @@ export class PostService {
   constructor(
     private http: HttpClient,
     private authService : AuthService,
+    private messageService: MessagesService,
     private errorHandlerService: ErrorHandlerService
   ) {}
+
+    private log(message: string): void {
+    this.messageService.add(message);
+  }
 
   fetchAll(): Observable<Post[]> {
     return this.http
@@ -36,9 +42,9 @@ export class PostService {
       );
   }
 
-    getPostById(id: string) {
+    getPostById(id: number) {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/posts/' + id).subscribe(
+      this.http.get(`${this.url}api/posts/${id}`).subscribe(
         () => {
           resolve;
         },
@@ -47,6 +53,10 @@ export class PostService {
         }
       );
     });
+  }
+
+  getOnePost(id: number): Observable<HttpResponse> {
+    return this.http.get(`${this.url}api/posts/${id}`)
   }
 
 
@@ -68,9 +78,9 @@ export class PostService {
 
 
  
-  modifyPost(id: string, post: Post, image: string | File) {
+  modifyPost(id: string, post: Post, attachment: string | File) {
     return new Promise((resolve, reject) => {
-      if (typeof image === 'string') {
+      if (typeof attachment === 'string') {
         this.http.put('http://localhost:3000/api/posts/' + id, post).subscribe(
           (response) => {
             resolve(response);
@@ -82,7 +92,7 @@ export class PostService {
       } else {
         const formData = new FormData();
         formData.append('post', JSON.stringify(post));
-        formData.append('image', image);
+        formData.append('attachment', attachment);
         this.http.put('http://localhost:3000/api/posts/' + id, formData).subscribe(
           (response) => {
             resolve(response);
@@ -103,39 +113,8 @@ export class PostService {
       );
   }
 
-  deleteComment(id: string): Observable<{}> {
-    return this.http
-      .delete(`${this.url}api/posts/comment/${id}`, this.httpOptions)
-      .pipe(
-        first(),
-        catchError(this.errorHandlerService.handleError<Post>("deleteComment"))
-      );
-  }
-
- addComment(newComment: Comments){
-     return new Promise((resolve, reject) => {
-        const formData = new FormData();
-        formData.append('post', JSON.stringify(newComment));
-        
-        return this.http.post<any>(`${this.url}api/posts/comment`,  formData).subscribe(
-        (response: { message: string }) => {
-          resolve(response);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-    }
-
- getComments(){
-   return this.http.get<any>(`${this.url}api/posts/comments`, this.httpOptions)
- }
 
  
 
-}
-function newSubject<T>(): any {
-  throw new Error("Function not implemented.");
 }
 

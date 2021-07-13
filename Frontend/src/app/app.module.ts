@@ -15,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
-import {MatIconModule} from '@angular/material/icon'
+import {MatIconModule} from '@angular/material/icon';
+import { CommentsFormComponent } from './comments/comments-form/comments-form.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatIconModule} from '@angular/material/icon'
     SignupComponent,
     HeaderComponent,
     PostsComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    CommentsFormComponent
   ],
   imports: [
     BrowserModule,

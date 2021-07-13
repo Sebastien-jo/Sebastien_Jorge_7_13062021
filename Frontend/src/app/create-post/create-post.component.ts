@@ -31,8 +31,8 @@ export class CreatePostComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private posts: PostService,
-              private auth: AuthService) { }
+              private postService: PostService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -44,7 +44,7 @@ export class CreatePostComponent implements OnInit {
           this.loading = false;
         } else {
           this.mode = 'edit';
-          this.posts.getPostById(params.id).then(
+          this.postService.getPostById(params.id).then(
             () => {
               this.loading = false;
             }
@@ -81,7 +81,7 @@ export class CreatePostComponent implements OnInit {
     newPost.title = this.form.get('title')!.value;
     newPost.content = this.form.get('content')!.value;
     if (this.mode === 'new') {
-      this.posts.createPost(newPost, this.form.get('attachment')!.value).then(
+      this.postService.createPost(newPost, this.form.get('attachment')!.value).then(
         (response) => {
           console.log(response);
           this.loading = false;
@@ -95,7 +95,7 @@ export class CreatePostComponent implements OnInit {
         }
       );
     } else if (this.mode === 'edit') {
-      this.posts.modifyPost(this.post.id, newPost, this.form.get('attachment')!.value).then(
+      this.postService.modifyPost(this.post.id, newPost, this.form.get('attachment')!.value).then(
         (response) => {
           console.log(response);
           this.loading = false;

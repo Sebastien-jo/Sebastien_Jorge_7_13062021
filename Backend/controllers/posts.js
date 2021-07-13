@@ -23,7 +23,7 @@ exports.createPost = async (req, res) => {
 			...postObject,
 			attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
 			UserId: req.user.id,
-			isModerate: 1,
+			isModerate: 0,
 			
 		});
 
@@ -34,6 +34,23 @@ exports.createPost = async (req, res) => {
 		res.status(200).json({ newPost });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
+	}
+};
+
+exports.getOnePost = async(req, res) =>{
+	try {
+		const post = await models.Posts.findOne({
+			attributes: ['id'],
+			where: {
+				id: req.post.id
+			}
+		});
+		if(!post) {
+			throw new Error("sorry can't find this post");
+		}
+		res.status(200).json({ post });
+	}catch (error) {
+		res.status(400).json({ error: error.message })
 	}
 };
 exports.getAllPosts = async (req, res) => {
@@ -171,7 +188,7 @@ exports.updatePost = async (req, res) => {
 		}`;
 
 		if (!attachmentURL) {
-			throw new Error('Sorry,something gone wrong , please try aagain later');
+			throw new Error('Sorry,something gone wrong , please try again later');
 		}
 
 		const postFound = await models.Posts.findOne({

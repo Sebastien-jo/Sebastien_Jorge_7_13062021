@@ -1,5 +1,8 @@
+
+
   
 export class Post {
+
     id!: string;
     UserId!: string;
     isOwner!: boolean;
@@ -12,4 +15,6 @@ export class Post {
     attachment!: string;
     createdAt!: Date;
     updatedAt!: Date;
+    comment!: any[];
+  static id: number;
 }
