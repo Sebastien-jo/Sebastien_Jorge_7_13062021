@@ -5,7 +5,7 @@
 <div class="card-body" *ngFor="let post of posts$ | async">
      <div class="card-text" >
         <p class="mb-0" >{{post.createdAt | date: 'mediumDate'}} </p>
-        <button *ngIf="userId === post.UserId">
+        <button *ngIf="userId === post.UserId || admin === true">
             
         <mat-icon (click)="delete(post.id)">delete</mat-icon>
         </button>
@@ -20,6 +20,10 @@
      <div class="card-text" *ngIf="post.content!=='null'">
         <p class="mb-0">{{post.content}}</p>
     </div>
-    <app-comments-form></app-comments-form>
-
+    <div>
+        <app-comments-form [currentPost]="post"></app-comments-form>
+        <div class="comment-display-block" *ngFor="let comments of post.comment">
+            <p>{{comments.comments}}</p>
+        </div>
+    </div>
 </div>

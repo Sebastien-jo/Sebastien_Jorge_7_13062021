@@ -40,9 +40,9 @@ exports.createPost = async (req, res) => {
 exports.getOnePost = async(req, res) =>{
 	try {
 		const post = await models.Posts.findOne({
-			attributes: ['id'],
+			attributes: ['id', 'userId', 'title', 'attachment'],
 			where: {
-				id: req.post.id
+				id: req.params.id
 			}
 		});
 		if(!post) {
@@ -66,6 +66,7 @@ exports.getAllPosts = async (req, res) => {
 					model: models.User,
 					attributes: ['email', 'isAdmin', 'id', 'firstName', 'lastName'],
 				},
+
 				
 			],
 		});          
@@ -89,7 +90,7 @@ exports.getPostProfile = async (req, res) => {
 			include: [
 				{
 					model: models.User,
-					attributes: ['email'],
+					attributes: ['email', 'firstName', 'lastName'],
 					where: { id: req.params.id },
 				},
 			],

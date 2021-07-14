@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-import { Observable, Subject } from "rxjs";
+import { Observable, of, Subject } from "rxjs";
 import { catchError, first } from "rxjs/operators";
 
 import { Post } from "../models/Post";
@@ -44,7 +44,7 @@ export class PostService {
 
     getPostById(id: number) {
     return new Promise((resolve, reject) => {
-      this.http.get(`${this.url}api/posts/${id}`).subscribe(
+      this.http.get(`${this.url}api/posts/one/${id}`).subscribe(
         () => {
           resolve;
         },
@@ -55,9 +55,7 @@ export class PostService {
     });
   }
 
-  getOnePost(id: number): Observable<HttpResponse> {
-    return this.http.get(`${this.url}api/posts/${id}`)
-  }
+
 
 
   createPost(newPost: Post, attachment : File){

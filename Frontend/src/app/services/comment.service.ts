@@ -28,25 +28,22 @@ export class CommentService {
     private messageService: MessagesService
   ) {}
 
-    private log(message: string): void {
-    this.messageService.add(message);
-  }
+
 
       updateComment(comments: any): Observable<Comments> {
-    return this.http.put<Comments>(`${this.url}api/posts/comments`, comments)
+    return this.http.put<Comments>(`${this.url}api/posts/comment`, comments)
       .pipe(
         catchError(this.errorHandlerService.handleError('updateComment', comments))
       );
   }
 
-  postComment(postId: number, comments: string): Observable<HttpResponse>{
-    return this.http.post(`${this.url}api/posts/comment`, {postId, comments}, { withCredentials: true, observe: 'response' })
+  postComment(comments: any): Observable<Comments> {
+    return this.http.post<Comments>(`${this.url}api/posts/comment`, comments)
       .pipe(
-        catchError(err => {
-        this.log(`Erreur: ${err.statusText}`);
-        return of(err);
-      }));
+        catchError(this.errorHandlerService.handleError('addPost', comments))
+      );
   }
+
 
   deleteComment(idComment: object): Observable<object> {
     return this.http.request('DELETE', `${this.url}api/posts/comment/${idComment}`, { body: idComment })

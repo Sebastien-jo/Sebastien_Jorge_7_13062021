@@ -8,6 +8,7 @@ exports.createComment = async (req, res) => {
 
 	try {
 
+               
 		// user
 		const findUser = await models.User.findOne({
 			attributes: ['email', 'firstName'],
@@ -22,7 +23,7 @@ exports.createComment = async (req, res) => {
 		
 		const newComment = await models.Comment.create({
 			comments: req.body.comments,
-			PostId: req.body.PostId,
+			postId: req.body.postId,
 			UserId: req.user.id,
 			
 			

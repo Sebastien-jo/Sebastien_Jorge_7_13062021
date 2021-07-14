@@ -7,14 +7,14 @@ export class Post {
     UserId!: string;
     isOwner!: boolean;
     title!: string;
-    user!: {
-        firstName: string;
-        lastName: string;
-    };
+    user!:{
+          firstname: string,
+          lastname: string,
+    }
     content!: string;
     attachment!: string;
     createdAt!: Date;
     updatedAt!: Date;
     comment!: any[];
-  static id: number;
 }
+

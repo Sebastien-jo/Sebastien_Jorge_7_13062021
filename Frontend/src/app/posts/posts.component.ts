@@ -27,10 +27,10 @@ export class PostsComponent implements OnInit {
   errorMsg!: string;
   loading!: boolean;
   postSub!: Subscription;
-  posts!: Post[];
   currentPost!: number;
   currentComment!: number;
   commentDisplay = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private postService: PostService,
@@ -39,6 +39,7 @@ export class PostsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.commentDisplay = true;
     this.posts$ = this.fetchAll();
     this.userId = this.authService.getUserById();
     console.log(this.userId)

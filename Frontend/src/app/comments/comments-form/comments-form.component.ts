@@ -26,8 +26,7 @@ export class CommentsFormComponent implements OnInit {
   @Input() currentComment: any;
   @Output() commentDisplayOff = new EventEmitter<boolean>();
   preloadData!: string;
-  postId!: number;
-  
+  id!: number;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -38,22 +37,32 @@ export class CommentsFormComponent implements OnInit {
                private messageService: MessagesService) { }
 
   ngOnInit(): void {
-   this.postId = +this.route.snapshot.paramMap.get('id')!;
-   
-  }
-
- onSubmit(event: { target: { value: string; }[]; }): void{
-   const content: string = event.target[0].value;
-    const postId: number = parseInt(event.target[1].value, 10);
-    this.commentService.postComment(postId, content)
-      .subscribe((response: HttpResponse) => {
-        if (response.status === 201) {
-          this.getPostById();
-        } else {
-          this.messageService.add(`Erreur: impossible d'ajouter ce commentaire`);
-        }
+    if (this.currentComment) {
+      this.commentsForm = this.formBuilder.group({
+        comments: [this.currentComment.comments, Validators.required],
       });
- }
- 
+      this.preloadData = this.currentComment.comments;
+     
+    } else {
+      this.commentsForm = this.formBuilder.group({
+        comments: ['', Validators.required],
+      });
+    }
+  }
+  onSubmit(): void {
+    const comment = {
+      comments: this.commentsForm.get('comments')!.value,
+    };
 
+    const formData = new FormData();
+    formData.append('comments', JSON.stringify(comment));
+      formData.append('postId', JSON.stringify(this.currentPost.id));
+      this.commentService.postComment(formData)
+        .subscribe(() => {
+          this.loading = false;
+         
+          this.postService.fetchAll();
+        });
+    }
+  
 }

@@ -55,6 +55,8 @@ export class AuthService {
     return this.currentUserSubject.value.user.id;
   }
 
+ 
+
 
   getToken(){
     return this.currentUser;
