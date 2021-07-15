@@ -17,6 +17,6 @@ router.put("/:id", auth, postsCtrl.updatePost)
 
 // Routes comments
 router.post("/comment", auth,commentCtrl.createComment);
-router.get("/comment", auth, commentCtrl.getComments);
+router.get("/:id/comments", auth, commentCtrl.getComments);
 router.delete("/comment", auth, commentCtrl.deleteComment);
 module.exports = router;

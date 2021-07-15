@@ -66,6 +66,10 @@ exports.getAllPosts = async (req, res) => {
 					model: models.User,
 					attributes: ['email', 'isAdmin', 'id', 'firstName', 'lastName'],
 				},
+				{
+					model: models.Comment,
+					attributes: ['comments', 'UserId', 'id', 'PostId'],
+				}
 
 				
 			],

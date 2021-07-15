@@ -8,8 +8,8 @@ export class Post {
     isOwner!: boolean;
     title!: string;
     user!:{
-          firstname: string,
-          lastname: string,
+          firstName: string,
+          lastName: string,
     }
     content!: string;
     attachment!: string;

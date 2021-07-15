@@ -55,6 +55,9 @@ export class AuthService {
     return this.currentUserSubject.value.user.id;
   }
 
+  isAdmin(){
+    return this.currentUserSubject.value.user.isAdmin;
+  }
  
 
 

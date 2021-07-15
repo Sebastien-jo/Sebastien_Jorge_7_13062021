@@ -50,17 +50,17 @@ export class CommentsFormComponent implements OnInit {
     }
   }
   onSubmit(): void {
-    const comment = {
+    const comments = {
       comments: this.commentsForm.get('comments')!.value,
+      PostId: this.currentPost.id
     };
+    
 
     const formData = new FormData();
-    formData.append('comments', JSON.stringify(comment));
-      formData.append('postId', JSON.stringify(this.currentPost.id));
-      this.commentService.postComment(formData)
+    formData.append('comments',JSON.stringify(comments));
+      this.commentService.postComment(comments)
         .subscribe(() => {
           this.loading = false;
-         
           this.postService.fetchAll();
         });
     }

@@ -21,9 +21,10 @@ exports.createComment = async (req, res) => {
 		// comment
 		
 		
+		
 		const newComment = await models.Comment.create({
 			comments: req.body.comments,
-			postId: req.body.postId,
+			PostId: req.body.PostId,
 			UserId: req.user.id,
 			
 			

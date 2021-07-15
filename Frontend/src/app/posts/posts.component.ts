@@ -18,10 +18,10 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class PostsComponent implements OnInit {
   posts$!: Observable<Post[]>;
+  comments!: Comments[];
   userId!: string;
-  admin!: boolean;
+  isAdmin!: boolean;
   form!: FormGroup;
-  comments!:Comments;
   mode!: string;
   isOpen =  false;
   errorMsg!: string;
@@ -30,7 +30,9 @@ export class PostsComponent implements OnInit {
   currentPost!: number;
   currentComment!: number;
   commentDisplay = false;
+  data: any;
 
+  
   constructor(
     private formBuilder: FormBuilder,
     private postService: PostService,
@@ -40,12 +42,17 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.commentDisplay = true;
-    this.posts$ = this.fetchAll();
-    this.userId = this.authService.getUserById();
-    console.log(this.userId)
+    this.posts$ = this.fetchAll()
+    this.fetchAll().subscribe(response =>{
+      this.data = response;
+      console.log(this.data)
+    });
     console.log(this.posts$)
+    this.userId = this.authService.getUserById();
+    this.isAdmin = this.authService.isAdmin();
+    console.log(this.userId)
     this.posts$.forEach(post => console.log(post));
-    this.commentDisplay = false;
+    
   }
 
   fetchAll(): Observable<Post[]> {
