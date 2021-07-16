@@ -68,7 +68,7 @@ exports.getAllPosts = async (req, res) => {
 				},
 				{
 					model: models.Comment,
-					attributes: ['comments', 'UserId', 'id', 'PostId'],
+					attributes: ['comments', 'UserId', 'id', 'PostId', 'createdAt'],
 				}
 
 				

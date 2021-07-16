@@ -1,15 +1,12 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
-    <button (click)="isOpen = !isOpen" class="btn">
-      Poster
-    </button>
-<form [formGroup]="commentsForm" *ngIf=isOpen (ngSubmit)="onSubmit();$event.preventDefault()">
+<form [formGroup]="commentsForm"  (ngSubmit)="onSubmit();$event.preventDefault()">
   <div class="form-group">
-    <label for="comments">commentaire</label>
-    <input type="text" class="form-control" id="comments" formControlName="comments">
+    <label for="comments" ></label>
+    <input type="text" class="form-control" id="comments" formControlName="comments" placeholder="Ajouter un commentaire">
   </div>
 
-  <button mat-raised-button type="submit" color="primary"  [disabled]="commentsForm.invalid">SUBMIT</button>
+  <button mat-raised-button type="submit" color="primary" (click)="reloadCurrentPage()" [disabled]="commentsForm.invalid">SUBMIT</button>
 </form>
 </div>
 </div>

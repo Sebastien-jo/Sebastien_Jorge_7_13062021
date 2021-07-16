@@ -8,8 +8,10 @@ import { Comments } from "src/app/models/Comments"
 import { Post } from "src/app/models/Post";
 import { User } from "src/app/models/User";
 import { FormGroup, FormBuilder, Validators} from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { CommentService } from "../services/comment.service";
 
+import { CreatePostComponent } from "../create-post/create-post.component";
 
 @Component({
   selector: "app-posts",
@@ -34,10 +36,12 @@ export class PostsComponent implements OnInit {
 
   
   constructor(
+    private commentService: CommentService,
     private formBuilder: FormBuilder,
     private postService: PostService,
     public authService: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -69,6 +73,20 @@ export class PostsComponent implements OnInit {
       .deletePost(postId)
       .subscribe(() => (this.posts$ = this.fetchAll()));
   }
+
+  modifyPost(): void {
+  
+  }
+ 
+
+  deleteComment(commentId: string): void {
+    this.commentService
+    .deleteComment(commentId)
+    .subscribe(() => (this.posts$ = this.fetchAll()));
+  }
+    reloadCurrentPage() {
+    window.location.reload();
+   }
 
 
 }

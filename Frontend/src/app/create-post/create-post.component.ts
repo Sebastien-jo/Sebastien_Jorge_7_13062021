@@ -28,6 +28,7 @@ export class CreatePostComponent implements OnInit {
   errorMsg!: string;
   imagePreview!: string;
   isOpen = false;
+  
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,

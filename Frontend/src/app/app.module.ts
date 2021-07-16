@@ -18,6 +18,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import {MatIconModule} from '@angular/material/icon';
 import { CommentsFormComponent } from './comments/comments-form/comments-form.component'
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { CommentsFormComponent } from './comments/comments-form/comments-form.co
     MatProgressSpinnerModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+   
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]

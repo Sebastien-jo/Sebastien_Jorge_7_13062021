@@ -20,7 +20,6 @@ export class CommentsFormComponent implements OnInit {
   commentsForm!: FormGroup;
   loading!: boolean;
   comments!: Comments;
-  isOpen = false;
   post!: Post;
   @Input() currentPost: any;
   @Input() currentComment: any;
@@ -63,6 +62,13 @@ export class CommentsFormComponent implements OnInit {
           this.loading = false;
           this.postService.fetchAll();
         });
-    }
+        this.commentsForm.reset();
+    };
+
+     reloadCurrentPage() {
+    window.location.reload();
+   }
+
+    
   
 }

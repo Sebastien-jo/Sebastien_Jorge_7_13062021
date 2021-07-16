@@ -45,10 +45,11 @@ export class CommentService {
   }
 
 
-  deleteComment(idComment: object): Observable<object> {
-    return this.http.request('DELETE', `${this.url}api/posts/comment/${idComment}`, { body: idComment })
+  deleteComment(commentId: string): Observable<{}> {
+    return this.http.delete(`${this.url}api/posts/comment/${commentId}`,  this.httpOptions )
       .pipe(
-        catchError(this.errorHandlerService.handleError('deleteComment', idComment))
+        first(),
+        catchError(this.errorHandlerService.handleError<Comments>('deleteComment'))
       );
   }
 

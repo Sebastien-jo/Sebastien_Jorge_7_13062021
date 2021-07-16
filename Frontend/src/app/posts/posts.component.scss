@@ -13,8 +13,35 @@
 	margin: 30px;
 	font-size: 2.5rem;
 	font-family: 'Roboto', sans-serif;
+		h3{
+			font-size: 3rem;
+			text-decoration: underline;
+			font-weight: bold;
+		}
+		p{
+			font-size: 2rem;
+		}
+		.user_info{
+			display: flex;
+			justify-content: space-between;
+
+			.date{
+				font-size: 2rem;
+				font-style: italic;
+			}
+		}
 	
-	
+			button{
+				border-radius: 10px;
+				border:none;
+
+				mat-icon{
+					font-size: 2rem;
+					color: #E52C13;
+					height: auto;
+					width: auto;
+				}
+			}
 }
 .card-img-top{
 	background: #C6C6C6;
@@ -29,3 +56,35 @@ img{
 }
 
 }	
+
+.comment_section{
+	.comment_view{		
+		margin: 30px;
+		border: 1px solid grey;
+		padding: 10px;
+		background: white;
+
+		.user_comment{
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.comment_text{
+			display: flex;
+			justify-content: space-between;
+
+			button{
+				border-radius: 10px;
+				border: none;
+				background: none;
+
+				mat-icon{
+					font-size: 2rem;
+					color: #E52C13;
+					height: auto;
+					width: auto;
+				}
+			}
+		}
+	}
+}
