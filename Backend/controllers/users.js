@@ -125,15 +125,24 @@ exports.userProfile = async (req, res) => {
 exports.deleteProfile = async (req, res) => {
 	try {
 		const userToFind = await models.User.findOne({
-			where: { id: req.user.id }
+			where: { id: req.params.id }
 		});
 		if (!userToFind) {
 			throw new Error("Sorry,can't find your account");
 		}
 
-		res.status(200).json({
+		const destroyedUser = await models.User.destroy({
+			where: { id: req.params.id},
+		});
+		if (!destroyedUser){
+			throw new Error('Sorry,something gone wrong,please try again later');
+		}else{
+			res.status(200).json({
 			message: "Your account has been successfully deleted"
 		});
+		
+		}
+		
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
@@ -142,7 +151,7 @@ exports.deleteProfile = async (req, res) => {
 exports.updateProfile = async (req, res) => {
 	try {
 		const userToFind = await models.User.findOne({
-			attributes: ["id", "isAdmin", "email"],
+			attributes: ["id", "email"],
 			where: { id: req.user.id }
 		});
 
@@ -153,7 +162,9 @@ exports.updateProfile = async (req, res) => {
 		const userToUpdate = await models.User.update(
 			{
 				email: req.body.email,
-				isAdmin: req.body.isAdmin
+				firstName: req.body.firstName,
+				lastName: req.body.lastName
+				
 			},
 			{
 				where: { id: req.user.id }
@@ -164,7 +175,7 @@ exports.updateProfile = async (req, res) => {
 			throw new Error("Sorry,something gone wrong,please try again later");
 		}
 		res.status(200).json({
-			user: userToUpdate.isAdmin,
+			
 			message: "Your account has been update"
 		});
 

@@ -2,8 +2,8 @@
 export interface User {
     [x: string]: any;
     id: string,
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
     isModerate: boolean;
     email: string;
     password: string;

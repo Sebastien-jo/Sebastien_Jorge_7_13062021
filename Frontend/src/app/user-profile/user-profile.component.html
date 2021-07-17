@@ -1,8 +1,36 @@
-<app-create-post (create)="createPost()"></app-create-post>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-<div class="card-body " *ngFor="let post of data " >
+<div class="infoUser">
+	<h3 class="userName">{{user.firstName}} {{user.lastName}}</h3>
+    <div class="row">
+    
+        <button><mat-icon (click)="isOpen = !isOpen">edit</mat-icon></button>
+        <form   [formGroup]="updateForm" (ngSubmit)="updateUser()" *ngIf=isOpen>
+            <div class="form-group">
+                <label for="firstName">Prénom</label>
+                <input type="text" id="firstName" class="form-control" formControlName="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Nom</label>
+                <input type="text" id="lastName" class="form-control" formControlName="lastName">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="form-control" formControlName="email">
+            </div>
+            <button mat-raised-button type="submit"  (click)="reloadCurrentPage()" [disabled]="updateForm.invalid">Modifier les informations</button>
+        </form>
+        <button>
+                <mat-icon (click)="deleteUser(user.id)">delete</mat-icon>
+        </button> 
+    
+    </div>
+    
+	<h4>Publications :</h4>
+	
+</div>
+
+
+<div class="card-body " *ngFor="let post of data">
+	<div class="userPosts" *ngIf="userId === post.UserId">
      <div class="card-text" >
          <div class="user_info">
             <p class="mb-0 user_name" >{{post.User.firstName}} {{post.User.lastName}}</p>
@@ -43,4 +71,5 @@
         </div>
            
     </div>
+</div>
 </div>

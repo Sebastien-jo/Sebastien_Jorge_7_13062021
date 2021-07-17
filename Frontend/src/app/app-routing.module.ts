@@ -5,6 +5,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
   { path: 'new-post', component: CreatePostComponent, canActivate: [AuthGuard] },
   { path: 'modify-post/:id', component: CreatePostComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: '', pathMatch: 'full', redirectTo: 'login'},
   { path: '**', redirectTo: 'login' }
 ];

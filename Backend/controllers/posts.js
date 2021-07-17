@@ -15,13 +15,19 @@ exports.createPost = async (req, res) => {
 
 		if (!findUser) {
 			throw new Error("Sorry,we can't find your account");
+		} 
+		
+		if (req.file) {
+			attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+		}else {
+			attachment = null;
 		}
 		// post
 		const postObject = JSON.parse(req.body.post);
 		delete req.body._id;
 		const newPost = await models.Posts.create({
 			...postObject,
-			attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+			attachment: attachment,
 			UserId: req.user.id,
 			isModerate: 0,
 			
@@ -69,7 +75,8 @@ exports.getAllPosts = async (req, res) => {
 				{
 					model: models.Comment,
 					attributes: ['comments', 'UserId', 'id', 'PostId', 'createdAt'],
-				}
+					include: {model: models.User, attributes: ['firstName', 'lastName']}
+				},
 
 				
 			],
@@ -83,31 +90,7 @@ exports.getAllPosts = async (req, res) => {
 	}
 };
 
-exports.getPostProfile = async (req, res) => {
-	try {
-		const order = req.query.order;
-		const fields = req.query.fields;
 
-		const postProfile = await models.Posts.findAll({
-			order: [order != null ? order.split(':') : ['createdAt', 'DESC']],
-			attributes: fields != '*' && fields != null ? fields.split(',') : null,
-			include: [
-				{
-					model: models.User,
-					attributes: ['email', 'firstName', 'lastName'],
-					where: { id: req.params.id },
-				},
-			],
-		});
-		if (!postProfile) {
-			throw new Error(' This user has posted nothing ');
-		}
-
-		res.status(200).json(postProfile);
-	} catch (error) {
-		res.status(400).json({ error: error.message });
-	}
-};
 
 exports.moderatePost = async (req, res) => {
 	try {

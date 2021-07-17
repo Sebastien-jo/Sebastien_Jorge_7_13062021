@@ -81,13 +81,28 @@ export class AuthService {
     }
 
 
+  deleteUser(userId: any): Observable<{}> {
+    return this.http.delete<User>( `${this.url}api/auth/${userId}`, this.httpOptions)
+    .pipe(
+      first(),
+      catchError(this.errorHandlerService.handleError<User>("deleteUser"))
+    );
+  }
 
+    updateUser(user: Omit<User, "id">): Observable<User> {
+    return this.http
+      .put<User>(`${this.url}api/auth/update`, user, this.httpOptions)
+      .pipe(
+        first(),
+        catchError(this.errorHandlerService.handleError<User>("updateUser"))
+      );
+  }
  
 
     logoutUser() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
         this.isUserLoggedIn$.next(false);
+        localStorage.removeItem('currentUser');      
         this.router.navigate(['login']);
     }
 

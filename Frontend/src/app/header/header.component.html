@@ -1,6 +1,8 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
+          <img src="../../assets/images/icon-left-font-monochrome-black.png">
         <ul class="nav navbar-nav">
+            
             <li routerLinkActive="active" *ngIf="!isAuth">
                 <a routerLink="signup">Créer mon compte</a>
             </li>
@@ -15,9 +17,10 @@
                 <a routerLink="posts">fil d'actualité</a>
             </li>
             <li routerLinkActive="active" *ngIf="isAuth">
-                <a routerLink="profil">Mon profil</a>
+                <a routerLink="profile">Mon profil</a>
             </li>
-              <img src="../../assets/images/icon-left-font-monochrome-black.png">
+              
         </ul> 
+      
     </div>
 </nav>

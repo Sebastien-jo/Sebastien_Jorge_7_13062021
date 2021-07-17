@@ -57,7 +57,6 @@ export class PostService {
 
 
 
-
   createPost(newPost: Post, attachment : File){
      return new Promise((resolve, reject) => {
         const formData = new FormData();

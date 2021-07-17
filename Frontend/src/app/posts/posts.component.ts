@@ -74,9 +74,6 @@ export class PostsComponent implements OnInit {
       .subscribe(() => (this.posts$ = this.fetchAll()));
   }
 
-  modifyPost(): void {
-  
-  }
  
 
   deleteComment(commentId: string): void {

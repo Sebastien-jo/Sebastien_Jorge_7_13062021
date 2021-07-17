@@ -7,8 +7,6 @@ router.post("/signup", usersCtrl.signup);
 router.post("/login", usersCtrl.login);
 router.delete("/:id", auth, usersCtrl.deleteProfile);
 router.get("/:id", auth, usersCtrl.userProfile);
-
-// projet d'amélioration
-//router.put("/update", auth, usersCtrl.updateProfile);
+router.put("/update", auth, usersCtrl.updateProfile);
 
 module.exports = router;

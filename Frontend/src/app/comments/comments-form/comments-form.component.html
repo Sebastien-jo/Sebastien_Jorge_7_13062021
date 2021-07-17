@@ -1,12 +1,18 @@
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
+<div class="row" >
+  <div class="col-sm-8 col-sm-offset-2  ">
 <form [formGroup]="commentsForm"  (ngSubmit)="onSubmit();$event.preventDefault()">
-  <div class="form-group">
+  <div class="form-group comment_form">
     <label for="comments" ></label>
     <input type="text" class="form-control" id="comments" formControlName="comments" placeholder="Ajouter un commentaire">
+    <button mat-raised-button type="submit" color="primary" (click)="reloadCurrentPage()" [disabled]="commentsForm.invalid">    <mat-icon
+                            class="mat-icon--custom"
+                            [ngClass]="{'display-none': commentsForm.invalid}"
+                        >
+                            send
+                        </mat-icon></button>
   </div>
 
-  <button mat-raised-button type="submit" color="primary" (click)="reloadCurrentPage()" [disabled]="commentsForm.invalid">SUBMIT</button>
+  
 </form>
 </div>
 </div>

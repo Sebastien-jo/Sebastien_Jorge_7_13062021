@@ -16,7 +16,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import {MatIconModule} from '@angular/material/icon';
-import { CommentsFormComponent } from './comments/comments-form/comments-form.component'
+import { CommentsFormComponent } from './comments/comments-form/comments-form.component';
+import { UserProfileComponent } from './user-profile/user-profile.component'
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CommentsFormComponent } from './comments/comments-form/comments-form.co
     HeaderComponent,
     PostsComponent,
     CreatePostComponent,
-    CommentsFormComponent
+    CommentsFormComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

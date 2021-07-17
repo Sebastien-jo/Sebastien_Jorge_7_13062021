@@ -63,7 +63,7 @@ export class CreatePostComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: [null, Validators.required],
       content: [null, Validators.required],
-      attachment: [null, Validators.required],
+      attachment: null,
     });
   }
 

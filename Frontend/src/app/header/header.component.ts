@@ -40,7 +40,8 @@ localStorage.getItem('currentUser');
 
   onLogout() {
     this.auth.logoutUser();
-    this.router.navigate(['login'])
+    this.isAuth = false;
+    this.router.navigate(['login'])    
   }
 
   ngOnDestroy() {
