@@ -5,7 +5,7 @@
 <div class="card-body " *ngFor="let post of data " >
      <div class="card-text" >
          <div class="user_info">
-            <p class="mb-0 user_name" >{{post.User.firstName}} {{post.User.lastName}}</p>
+            <h2 class="mb-0 user_name" >{{post.User.firstName}} {{post.User.lastName}}</h2>
            <p class="date">{{post.createdAt | date: 'mediumDate'}} </p>
          </div>
         
@@ -28,7 +28,7 @@
             
         <div *ngFor="let comments of post.Comments " class="comment_view">
             <div class="user_comment">
-                <p class="comment_name">{{comments.User.firstName}} {{comments.User.lastName}}</p>
+                <h4 class="comment_name">{{comments.User.firstName}} {{comments.User.lastName}}</h4>
                 <p class="comment_date">{{comments.createdAt | date: 'mediumDate'}}</p>
             </div>
             <div class="comment_text">

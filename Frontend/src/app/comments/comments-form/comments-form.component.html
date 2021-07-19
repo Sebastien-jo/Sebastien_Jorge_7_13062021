@@ -4,7 +4,7 @@
   <div class="form-group comment_form">
     <label for="comments" ></label>
     <input type="text" class="form-control" id="comments" formControlName="comments" placeholder="Ajouter un commentaire">
-    <button mat-raised-button type="submit" color="primary" (click)="reloadCurrentPage()" [disabled]="commentsForm.invalid">    <mat-icon
+    <button mat-raised-button type="submit"  (click)="reloadCurrentPage()" [disabled]="commentsForm.invalid">    <mat-icon
                             class="mat-icon--custom"
                             [ngClass]="{'display-none': commentsForm.invalid}"
                         >

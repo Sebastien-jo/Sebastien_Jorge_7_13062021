@@ -1,5 +1,5 @@
 <div class="infoUser">
-	<h3 class="userName">{{user.firstName}} {{user.lastName}}</h3>
+	<h2 class="userName">{{user.firstName}} {{user.lastName}}</h2>
     <div class="row">
     
         <button><mat-icon (click)="isOpen = !isOpen">edit</mat-icon></button>
@@ -33,7 +33,7 @@
 	<div class="userPosts" *ngIf="userId === post.UserId">
      <div class="card-text" >
          <div class="user_info">
-            <p class="mb-0 user_name" >{{post.User.firstName}} {{post.User.lastName}}</p>
+            <h3 class="mb-0 user_name" >{{post.User.firstName}} {{post.User.lastName}}</h3>
            <p class="date">{{post.createdAt | date: 'mediumDate'}} </p>
          </div>
         
