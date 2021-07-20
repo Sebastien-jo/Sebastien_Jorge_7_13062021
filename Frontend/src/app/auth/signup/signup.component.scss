@@ -6,4 +6,9 @@
 		background-color: #091F43;
 		color: white;
 	}
+		@media screen and(max-width: 425px) {
+		img{
+			width: 250px;
+		}
+	}
 }

@@ -35,6 +35,8 @@ export class CommentsFormComponent implements OnInit {
               private authService: AuthService,
                private messageService: MessagesService) { }
 
+
+  //formulaire du commentaire             
   ngOnInit(): void {
     if (this.currentComment) {
       this.commentsForm = this.formBuilder.group({

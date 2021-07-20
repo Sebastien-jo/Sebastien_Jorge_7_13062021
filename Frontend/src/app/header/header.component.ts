@@ -32,12 +32,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
               }
-
+//récupération des infos utilisateur dans le local storage
   ngOnInit() {
 localStorage.getItem('currentUser');
   
   }
-
+// à la déconnexion de l'utilisateur suppression des infos utilisateur dans le local storage
   onLogout() {
     this.auth.logoutUser();
     this.isAuth = false;

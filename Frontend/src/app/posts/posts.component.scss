@@ -1,8 +1,8 @@
 
-
 .card-body{
 	margin:  auto;
-	width: 800px;
+	width: 100%;
+	max-width: 800px;
 	background: #091F43;
 	border-radius: 10px;
 	margin-top: 70px;
@@ -51,7 +51,9 @@
 	border: 1px solid grey;
 	
 img{
-	height: 600px;
+	max-height: 600px;
+	min-height: 400px;
+	width: 100%;
 	max-width: 600px;
 	display: flex;
 	justify-content: center;
@@ -106,6 +108,7 @@ img{
 	}
 	.comment_form{
 		margin-top: 20px;
+		padding: 0 10px 0 10px;
 	}
 	
 }

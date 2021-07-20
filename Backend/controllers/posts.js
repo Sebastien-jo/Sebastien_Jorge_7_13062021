@@ -3,7 +3,7 @@ const models = require('../models');
 const fs = require('fs');
 
 
-
+// Création d'un nouveau post
 exports.createPost = async (req, res) => {
 	try {
 
@@ -43,22 +43,7 @@ exports.createPost = async (req, res) => {
 	}
 };
 
-exports.getOnePost = async(req, res) =>{
-	try {
-		const post = await models.Posts.findOne({
-			attributes: ['id', 'userId', 'title', 'attachment'],
-			where: {
-				id: req.params.id
-			}
-		});
-		if(!post) {
-			throw new Error("sorry can't find this post");
-		}
-		res.status(200).json({ post });
-	}catch (error) {
-		res.status(400).json({ error: error.message })
-	}
-};
+
 exports.getAllPosts = async (req, res) => {
 	try {
 		const fields = req.query.fields;
@@ -91,37 +76,6 @@ exports.getAllPosts = async (req, res) => {
 };
 
 
-
-exports.moderatePost = async (req, res) => {
-	try {
-		const postToModerate = await models.Posts.findOne({
-			where: { id: req.params.id },
-		});
-
-		if (!postToModerate) {
-			throw new Error(" Couldn't find your post");
-		}
-
-		const moderatedPost = (await postToModerate.isModerate)
-			? postToModerate.update({
-					isModerate: 0,
-			  })
-			: postToModerate.update({
-					isModerate: 1,
-			  });
-
-		if (!moderatedPost) {
-			throw new Error('Sorry,something gone wrong,please try again later');
-		} else {
-			res.status(200).json({
-				message: 'This post is now moderate',
-				postModerate: postToModerate,
-			});
-		}
-	} catch (error) {
-		res.status(400).json({ error: error.message });
-	}
-};
 
 exports.deletePost = async (req, res) => {
 	try {
@@ -169,7 +123,7 @@ exports.deletePost = async (req, res) => {
 };
 
 // PROJET AMELIORATION
-exports.updatePost = async (req, res) => {
+/*exports.updatePost = async (req, res) => {
 	try {
 		const attachmentURL = `${req.protocol}://${req.get('host')}/images/${
 			req.file.filename
@@ -204,5 +158,5 @@ exports.updatePost = async (req, res) => {
 		});
 	} catch (error) {
 		res.status(400).json({ error: error.message });
-	}
-};
+	
+};*/

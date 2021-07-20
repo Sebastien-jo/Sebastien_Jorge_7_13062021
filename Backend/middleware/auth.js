@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
+
+//verification du token et récupération des infos de l'utilisateur
 module.exports = async (req, res, next) => {
 	try {
 		const token = req.headers.authorization.split(" ")[1];

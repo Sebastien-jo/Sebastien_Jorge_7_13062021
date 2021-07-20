@@ -4,6 +4,8 @@
 const models = require("../models");
 const fs = require("fs");
 
+
+// Création d'un commentaire
 exports.createComment = async (req, res) => {
 
 	try {
@@ -39,33 +41,9 @@ exports.createComment = async (req, res) => {
 		res.status(400).json({ error: error.message });
 	}
 };
-exports.getComments = async (req, res) => {
-	try {
-		const order = req.query.order;
-		const comments = await models.Comment.findAll({
-			attributes: [
-				"id",
-				"comments",
-				"UserId",
-				"PostId",
-				"createdAt",
-				"updatedAt"
-			],
-			order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
-			where: { postId: req.params.id },
-			include: [{ model: models.User, attributes: ["firstName","lastName"] }]
-		});
-		if (comments) {
-			res.status(200).send({ message: comments });
-		} else {
-			throw new Error("There are no comments");
-		}
-	} catch (error) {
-		res.status(400).json({ error: error.message });
-	}
-};
 
-// future project
+
+// Suppression d'un commentaire
 
 exports.deleteComment = async (req, res) => {
 	try {

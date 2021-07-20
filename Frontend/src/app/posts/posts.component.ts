@@ -58,7 +58,7 @@ export class PostsComponent implements OnInit {
     this.posts$.forEach(post => console.log(post));
     
   }
-
+// récupération de tous les posts
   fetchAll(): Observable<Post[]> {
     return this.postService.fetchAll();
     

@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 
+
+//Création d'un nouvel utilisateur en utilisant bcrypt pour hashe le mot de passe dans la BDD et en vérifiant avec le mail que l'utilisateur n'existe pas déja
 exports.signup = async (req, res) => {
 	const firstName = req.body.firstName;
 	const lastName = req.body.lastName;
@@ -71,6 +73,8 @@ exports.signup = async (req, res) => {
 	}
 };
 
+
+//Connexion utilisateur existant
 exports.login = async (req, res) => {
 	try {
 		const user = await models.User.findOne({
@@ -104,6 +108,7 @@ exports.login = async (req, res) => {
 	}
 };
 
+// Page du profil de l'utilisateur courrant
 exports.userProfile = async (req, res) => {
 	try {
 		const user = await models.User.findOne({
@@ -122,6 +127,8 @@ exports.userProfile = async (req, res) => {
 	}
 };
 
+
+//Suppression de l'utilisateur dans la BDD
 exports.deleteProfile = async (req, res) => {
 	try {
 		const userToFind = await models.User.findOne({
@@ -148,6 +155,8 @@ exports.deleteProfile = async (req, res) => {
 	}
 };
 
+
+//modification de information de l'utilisateur
 exports.updateProfile = async (req, res) => {
 	try {
 		const userToFind = await models.User.findOne({

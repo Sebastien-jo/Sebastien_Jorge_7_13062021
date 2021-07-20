@@ -58,7 +58,7 @@ export class CreatePostComponent implements OnInit {
       }
     );
   }
-
+//formulaire du post
   initEmptyForm() {
     this.form = this.formBuilder.group({
       title: [null, Validators.required],
@@ -66,7 +66,7 @@ export class CreatePostComponent implements OnInit {
       attachment: null,
     });
   }
-
+//projet d'amelioration du formulaire pour modification du post
   initModifyForm(post: Post) {
     this.form = this.formBuilder.group({
       title: [this.post.title, Validators.required],
@@ -76,6 +76,7 @@ export class CreatePostComponent implements OnInit {
     this.imagePreview = this.post.attachment;
   }
 
+// envoie des informations récupéré dans le formulaire
   onSubmit() {
     this.loading = true;
     const newPost = new Post();
