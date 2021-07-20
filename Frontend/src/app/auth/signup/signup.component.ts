@@ -1,6 +1,6 @@
   
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators, PatternValidator } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { AuthService } from "src/app/services/auth.service";
@@ -13,7 +13,9 @@ import { AuthService } from "src/app/services/auth.service";
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   errorMessage!: string;
-  constructor(private authService: AuthService, private router: Router) {}
+  submitted = false;
+  constructor(private authService: AuthService,
+     private router: Router,) {}
 
   ngOnInit(): void {
     this.signupForm = this.createFormGroup();
@@ -26,7 +28,7 @@ export class SignupComponent implements OnInit {
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [
         Validators.required,
-        Validators.minLength(7),
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
       ]),
     });
   }
@@ -34,7 +36,12 @@ export class SignupComponent implements OnInit {
   signup(): void {
     this.authService.signup(this.signupForm.value).subscribe((msg) => {
       console.log(msg);
-      this.router.navigate(["login"]);
     });
+    if("error"){
+      alert("une erreur s'est produite, veuillez ressayer !")
+    }else{
+      this.router.navigate(['login'])
+    }
   }
 }
+

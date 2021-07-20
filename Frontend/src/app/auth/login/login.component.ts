@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(["posts"]);
                 },
                 error => {
+                    alert('mot de passe ou email incorrect')
                     this.error = error;
                     this.loading = false;
                 });

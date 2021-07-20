@@ -1,23 +1,23 @@
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-        <img src="../../assets/images/icon-left-font-monochrome-black.png" width="400px" margin="0">
+        <img src="../../assets/images/icon-left-font-monochrome-black.png" width="400px" margin="0" alt="logo groupomania">
         <h2>Créer un compte</h2>
         <form   [formGroup]="signupForm" (ngSubmit)="signup()">
             <div class="form-group">
                 <label for="firstName">Prénom</label>
-                <input type="text" id="firstName" class="form-control" formControlName="firstName">
+                <input type="text" id="firstName" class="form-control" formControlName="firstName" placeholder="ex: jonh">
             </div>
             <div class="form-group">
                 <label for="lastName">Nom</label>
-                <input type="text" id="lastName" class="form-control" formControlName="lastName">
+                <input type="text" id="lastName" class="form-control" formControlName="lastName" placeholder="ex: doe">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" id="email" class="form-control" formControlName="email">
+                <input type="text" id="email" class="form-control" formControlName="email" placeholder="ex: jonhdoe@email.fr">
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
-                <input type="password" id="password" class="form-control" formControlName="password">
+                <input type="password" id="password" class="form-control" formControlName="password" placeholder="doit contenir au moins 8 charactère, 1 Majuscule, 1 minuscule, 1 chiffre et un symbole">
             </div>
             <button class="btn btn-prymary" type="submit" [disabled]="signupForm.invalid">Créer mon compte</button>
         </form>
