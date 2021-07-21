@@ -74,8 +74,8 @@ export class PostService {
     }
 
 
- 
-  modifyPost(id: string, post: Post, attachment: string | File) {
+// projet d'amélioration
+modifyPost(id: string, post: Post, attachment: string | File) {
     return new Promise((resolve, reject) => {
       if (typeof attachment === 'string') {
         this.http.put('http://localhost:3000/api/posts/' + id, post).subscribe(
